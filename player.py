@@ -2,7 +2,6 @@ from settings import *
 from spriteloader import SpriteLoader
 
 class Player(pygame.sprite.Sprite):
-
     def __init__(self, x, y, width, height):
 
         self.sprite_sheets = SpriteLoader()
@@ -38,17 +37,17 @@ class Player(pygame.sprite.Sprite):
             self.character_direction = 'left'
             self.animation_frame = 0
 
-    def animation(self, fps):
-        pass
-        # self.move(self.x_speed, self.y_speed)
+    # def animation(self, fps):
+    #     pass
+    #     # self.move(self.x_speed, self.y_speed)
 
     def load_sprite(self, display):
-        self.sprite = self.SPRITES["Idle_" + self.character_direction][0]
-        display.blit(self.sprite,(self.character.x, self.character.y))
-
-
         pygame.draw.rect(display, 'blue', self.character)
         pygame.draw.rect(display, self.hitbox_colour, self.hitbox, 1)
+
+
+        self.sprite = self.SPRITES["Idle_" + self.character_direction][0]
+        display.blit(self.sprite,(self.character.x, self.character.y))
 
 
     def update(self, display):
