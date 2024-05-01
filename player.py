@@ -3,7 +3,7 @@ from settings import *
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height):
 
-        self.SPRITES = load_sprite_sheets("Characters","Knight",38,20)
+        self.SPRITES = load_sprite_sheets("Characters","Archer",30,30, True) #Sprite Loading, Directory 1, Directory 2, Width, Height
 
 
         self.character_colour = 'blue'
@@ -37,6 +37,6 @@ class Player(pygame.sprite.Sprite):
 
 
     def update(self, display):
-        self.sprite = self.SPRITES['Idle_' + self.character_direction][0]
+        self.sprite = self.SPRITES['idle' + self.character_direction][0]
         display.blit(self.sprite, (self.character.x, self.character.y))
         self.movement()

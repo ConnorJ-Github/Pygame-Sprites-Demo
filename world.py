@@ -5,7 +5,7 @@ class World:
     def __init__(self):
         self.display_surface = pygame.display.get_surface()
 
-        self.character = Player(HEIGHT/2,WIDTH/2, 25,25)
+        self.character = Player(HEIGHT/2,WIDTH/2, 50,50)
 
 
     def run(self):
