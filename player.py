@@ -1,13 +1,18 @@
 from settings import *
+from sprite_loader import *
+
 
 class Player(pygame.sprite.Sprite):
+
     def __init__(self, x, y, width, height):
+        super().__init__()
 
         self.SPRITES = load_sprite_sheets("Characters","Archer",30,30, True) #Sprite Loading, Directory 1, Directory 2, Width, Height
 
-
-        self.character_colour = 'blue'
         self.character = pygame.Rect(x,y, width,height)
+
+        self.hitbox_colour = 'red'
+        self.hitbox = pygame.Rect(self.character.x,self.character.y,width,height)
 
         self.sprite_mask = None
 
@@ -35,8 +40,12 @@ class Player(pygame.sprite.Sprite):
         pass
         # self.move(self.x_speed, self.y_speed)
 
+    def load_sprite(self, display):
+        self.sprite = self.SPRITES['Idle_' + self.character_direction][0]
+        display.blit(self.sprite, (self.character.x, self.character.y))
+
 
     def update(self, display):
-        self.sprite = self.SPRITES['idle' + self.character_direction][0]
-        display.blit(self.sprite, (self.character.x, self.character.y))
         self.movement()
+        self.load_sprite(display)
+        pygame.draw.rect(display, self.hitbox_colour, self.hitbox, 1)
