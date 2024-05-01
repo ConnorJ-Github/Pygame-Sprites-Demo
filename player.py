@@ -1,16 +1,16 @@
 from settings import *
-from sprite_loader import *
-
+from spriteloader import SpriteLoader
 
 class Player(pygame.sprite.Sprite):
+
     def __init__(self, x, y, width, height):
 
-        self.SPRITES = load_sprite_sheets("Characters","Archer",30,30, True) #Sprite Loading, Directory 1, Directory 2, Width, Height
+        self.sprite_sheets = SpriteLoader()
+        self.SPRITES = self.sprite_sheets.load_sprite_sheets("Characters","Archer",32,32, True) #Sprite Loading, Directory 1, Directory 2, Width, Height
 
         self.character = pygame.Rect(x,y, width,height)
 
         self.hitbox_colour = 'red'
-
         self.hitbox = pygame.Rect(x,y,width,height)
 
         self.sprite_mask = None
@@ -18,10 +18,11 @@ class Player(pygame.sprite.Sprite):
         self.character_direction = 'right'
         self.animation_frame = 0
 
+        self.BLACK = (0,0,0)
 
         self.y_speed = 5
         self.x_speed = 5
-    
+
 
     def movement(self):
         
@@ -42,8 +43,10 @@ class Player(pygame.sprite.Sprite):
         # self.move(self.x_speed, self.y_speed)
 
     def load_sprite(self, display):
-        # self.sprite = self.SPRITES['Idle_' + self.character_direction][0]
-        # display.blit(self.sprite, (self.character.x, self.character.y))
+        self.sprite = self.SPRITES["Idle_" + self.character_direction][0]
+        display.blit(self.sprite,(self.character.x, self.character.y))
+
+
         pygame.draw.rect(display, 'blue', self.character)
         pygame.draw.rect(display, self.hitbox_colour, self.hitbox, 1)
 

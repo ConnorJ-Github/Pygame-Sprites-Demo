@@ -1,6 +1,8 @@
 from settings import *
 from world import World
 
+
+
 class Game:
     def __init__(self):
         pygame.init()
