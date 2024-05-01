@@ -5,7 +5,7 @@ class Game:
     def __init__(self):
         pygame.init()
         self.WIN = pygame.display.set_mode((WIDTH,HEIGHT))
-        pygame.display.set_caption("Sprite Demo")
+        pygame.display.set_caption("Sprites Demo")
 
         self.clock = pygame.time.Clock()
 
