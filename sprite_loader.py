@@ -23,7 +23,7 @@ def load_sprite_sheets(dir1, dir2, width, height, direction = False):
             sprites.append(pygame.transform.scale2x(surface))
 
         if direction:
-            all_sprites[image.replace(".png", "")+ "_right"] = sprites
+            all_sprites[image.replace(".png", "") + "_right"] = sprites
             all_sprites[image.replace(".png", "") + "_left"] = flip(sprites)
         else:
             all_sprites[image.replace(".png", "")] = sprites
