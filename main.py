@@ -11,9 +11,6 @@ class Game:
 
         self.world_screen = World()
 
-        
-        
-
 
     def run(self):
         while True:
