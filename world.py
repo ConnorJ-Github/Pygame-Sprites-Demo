@@ -22,7 +22,3 @@ class World:
             self.character.x -= self.x_speed
         if key[pygame.K_d] == True:
             self.character.x += self.x_speed
-        if key[pygame.K_w] == True:
-            self.character.y -= self.y_speed
-        if key[pygame.K_s] == True:
-            self.character.y += self.y_speed
