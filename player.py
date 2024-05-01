@@ -3,9 +3,8 @@ from settings import *
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height):
 
-        SPRITES = load_sprite_sheets("Characters","Knight",38,20)
+        self.SPRITES = load_sprite_sheets("Characters","Knight",38,20)
 
-        self.idle_0 = pygame.image.load('Assets\Idle\-ready_1.png').convert_alpha
 
         self.character_colour = 'blue'
         self.character = pygame.Rect(x,y, width,height)
@@ -38,5 +37,6 @@ class Player(pygame.sprite.Sprite):
 
 
     def update(self, display):
-        pygame.draw.rect(display, self.character_colour, self.character)
+        self.sprite = self.SPRITES['Idle_' + self.character_direction][0]
+        display.blit(self.sprite, (self.character.x, self.character.y))
         self.movement()
