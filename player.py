@@ -1,42 +1,40 @@
 from settings import *
 
-class Player():
-    def __init__(self):
-        #Assets
-        self.walking_sprites = []
-        self.walking_sprites.append(pygame.image.load('Assets\Walking\walk_1.png').convert_alpha)
-        self.walking_sprites.append(pygame.image.load('Assets\Walking\walk_2.png').convert_alpha)
-        self.walking_sprites.append(pygame.image.load('Assets\Walking\walk_2.png').convert_alpha)
-        self.walking_sprites.append(pygame.image.load('Assets\Walking\walk_2.png').convert_alpha)
-        self.walking_sprites.append(pygame.image.load('Assets\Walking\walk_2.png').convert_alpha)
-        self.walking_sprites.append(pygame.image.load('Assets\Walking\walk_2.png').convert_alpha)
+class Player(pygame.sprite.Sprite):
+    def __init__(self, x, y, width, height):
 
-        self.jumping_sprites = []
-        self.jumping_sprites.append(pygame.image.load('Assets\Jumping\jump_1.png').convert_alpha)
-        self.jumping_sprites.append(pygame.image.load('Assets\Jumping\jump_2.png').convert_alpha)
-        self.jumping_sprites.append(pygame.image.load('Assets\Jumping\jump_3.png').convert_alpha)
-        self.jumping_sprites.append(pygame.image.load('Assets\Jumping\jump_4.png').convert_alpha)
-        self.jumping_sprites.append(pygame.image.load('Assets\Jumping\jump_5.png').convert_alpha)
+        SPRITES = load_sprite_sheets("Characters","Knight",38,20)
 
-        self.idle_sprites = []
-        self.idle_sprites.append(pygame.image.load('Assets\Idle\-ready_1.png').convert_alpha)
-        self.idle_sprites.append(pygame.image.load('Assets\Idle\-ready_2.png').convert_alpha)
-        self.idle_sprites.append(pygame.image.load('Assets\Idle\-ready_3.png').convert_alpha)
+        self.idle_0 = pygame.image.load('Assets\Idle\-ready_1.png').convert_alpha
 
         self.character_colour = 'blue'
-        self.character = pygame.Rect(HEIGHT/2,WIDTH/2, 25,25)
+        self.character = pygame.Rect(x,y, width,height)
+
+        self.sprite_mask = None
+
+        self.character_direction = 'right'
+        self.animation_frame = 0
+
 
         self.y_speed = 5
         self.x_speed = 5
-
+    
 
     def movement(self):
         
         key = pygame.key.get_pressed()
         if key[pygame.K_a] == True:
             self.character.x -= self.x_speed
+            self.character_direction = 'right'
+            self.animation_frame = 0
         if key[pygame.K_d] == True:
             self.character.x += self.x_speed
+            self.character_direction = 'left'
+            self.animation_frame = 0
+
+    def animation(self, fps):
+        pass
+        # self.move(self.x_speed, self.y_speed)
 
 
     def update(self, display):
