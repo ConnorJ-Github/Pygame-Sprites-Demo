@@ -4,14 +4,16 @@ from spriteloader import SpriteLoader
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height):
 
+
+
         self.sprite_sheets = SpriteLoader()
 
         self.sprite_height = 100
         self.sprite_width = 100
         self.SPRITES = self.sprite_sheets.load_sprite_sheets("Characters","Archer",self.sprite_width,self.sprite_height, True) #Sprite Loading, Directory 1, Directory 2, Width, Height
-
+                
         self.character = pygame.Rect(x, y, width, height)
-
+        
         self.mask = None
         self.character_direction = 'right'
         self.animation_frame = 0
@@ -78,7 +80,7 @@ class Player(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.sprite)
 
     def load_sprite(self, display):
-        #pygame.draw.rect(display, 'blue', self.character)
+       # pygame.draw.rect(display, 'blue', self.character)
         display.blit(self.sprite,(self.character.x, self.character.y))
 
 
