@@ -50,11 +50,10 @@ class Player(pygame.sprite.Sprite):
         if key[pygame.K_a] == True:
             self.move_left(self.movement_speed)
             self.character_direction = 'left'
-            self.animation_frame = 0
         if key[pygame.K_d] == True:
             self.move_right(self.movement_speed)
             self.character_direction = 'right'
-            self.animation_frame = 0
+
 
 
     def update_sprite(self):
