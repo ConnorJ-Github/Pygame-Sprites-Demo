@@ -7,9 +7,9 @@ class Player(pygame.sprite.Sprite):
         self.sprite_sheets = SpriteLoader()
         self.SPRITES = self.sprite_sheets.load_sprite_sheets("Characters","Archer",100,100, True) #Sprite Loading, Directory 1, Directory 2, Width, Height
 
-        self.character = pygame.Rect(x - 50, y-50, width, height)
+        self.character = pygame.Rect(x, y, width, height)
 
-        self.sprite_mask = None
+        self.mask = None
         self.character_direction = 'right'
         self.animation_frame = 0
 
@@ -55,7 +55,6 @@ class Player(pygame.sprite.Sprite):
             self.character_direction = 'right'
 
 
-
     def update_sprite(self):
         sprite_sheet = 'Idle'
         
@@ -68,11 +67,14 @@ class Player(pygame.sprite.Sprite):
         sprite_index = (self.animation_frame // self.animation_delay) % len(sprites)
         self.sprite = sprites[sprite_index]
         self.animation_frame += 1
+        self.sprite_mask()
+
+    def sprite_mask(self): #Creates an accurate "Character" mask that improves the "collision" box of the character
+        self.character = self.sprite.get_rect(topleft=(self.character.x, self.character.y))
+        self.mask = pygame.mask.from_surface(self.sprite)
 
     def load_sprite(self, display):
         # pygame.draw.rect(display, 'blue', self.character)
-
-        #self.sprite = self.SPRITES["Idle_" + self.character_direction][0]
         display.blit(self.sprite,(self.character.x, self.character.y))
 
 
