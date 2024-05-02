@@ -31,3 +31,7 @@
 - Settings - Controlling display size and FPS
 
 - While gravity has been implemented, it is not currently active. This is due to their not being a surface to "land/interactive" upon. 
+
+**Asset**
+
+- https://luizmelo.itch.io/huntress-2?download
