@@ -20,6 +20,9 @@ class Player(pygame.sprite.Sprite):
         self.y_speed = 0
         self.x_speed = 0
 
+        self.gravity_count = 0 #Used to record how long the player has been falling
+        self.gravity_weight = 1
+
         self.moving = False
 
         self.animation_delay = 5
@@ -74,7 +77,8 @@ class Player(pygame.sprite.Sprite):
         display.blit(self.sprite,(self.character.x, self.character.y))
 
 
-    def update(self, display):
+    def update(self, display, fps):
+        self.y_speed += min(1,(self.gravity_count / fps) * self.gravity_weight) #Increases the falling speed based of how long the player has been falling
         self.move(self.x_speed, self.y_speed)
         self.movement()
         self.load_sprite(display)

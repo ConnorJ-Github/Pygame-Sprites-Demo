@@ -8,6 +8,6 @@ class World:
         self.character = Player(HEIGHT/2,WIDTH/2, 100,100)
 
 
-    def run(self):
+    def run(self,fps):
         self.display_surface.fill('grey')
-        self.character.update(self.display_surface)
+        self.character.update(self.display_surface, fps)

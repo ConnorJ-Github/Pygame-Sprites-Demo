@@ -16,13 +16,13 @@ class Game:
 
     def run(self):
         while True:
-            self.clock.tick(FPS)
+            fps = self.clock.tick(FPS)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.QUIT()
 
 
-            self.world_screen.run()
+            self.world_screen.run(fps)
 
             pygame.display.update()
 
