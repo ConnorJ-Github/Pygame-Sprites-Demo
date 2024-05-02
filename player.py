@@ -47,12 +47,10 @@ class Player(pygame.sprite.Sprite):
         
         self.x_speed = 0
         key = pygame.key.get_pressed()
-        if key[pygame.K_a] == True:
+        if key[pygame.K_a] and self.character.x + 75 > self.movement_speed: #Temp code to limit the character to the screen
             self.move_left(self.movement_speed)
-            self.character_direction = 'left'
-        if key[pygame.K_d] == True:
+        if key[pygame.K_d] and self.character.x <  400 - 125 - self.movement_speed: #temp code to limit the character to the screen
             self.move_right(self.movement_speed)
-            self.character_direction = 'right'
 
 
     def update_sprite(self):
@@ -60,6 +58,9 @@ class Player(pygame.sprite.Sprite):
         
         if self.x_speed != 0:
             sprite_sheet = 'Run'
+
+        if self.y_speed != 0:
+            sprite_sheet = 'Jump'
 
         sprite_sheet_name = sprite_sheet + "_" + self.character_direction
         sprites = self.SPRITES[sprite_sheet_name]
@@ -74,13 +75,16 @@ class Player(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.sprite)
 
     def load_sprite(self, display):
-        # pygame.draw.rect(display, 'blue', self.character)
+        #pygame.draw.rect(display, 'blue', self.character)
         display.blit(self.sprite,(self.character.x, self.character.y))
 
 
     def update(self, display, fps):
         
         self.y_speed += min(1,(self.gravity_count / fps) * self.gravity_weight) #Increases the falling speed based of how long the player has been falling
+
+        #self.gravity_count += 1
+
         self.move(self.x_speed, self.y_speed)
         self.movement()
         self.update_sprite()
