@@ -60,7 +60,7 @@ class Player(pygame.sprite.Sprite):
     def update_sprite(self):
         sprite_sheet = 'Idle'
         
-        if self.y_speed != 0:
+        if self.x_speed != 0:
             sprite_sheet = 'Run'
 
         sprite_sheet_name = sprite_sheet + "_" + self.character_direction
@@ -73,13 +73,14 @@ class Player(pygame.sprite.Sprite):
     def load_sprite(self, display):
         # pygame.draw.rect(display, 'blue', self.character)
 
-        self.sprite = self.SPRITES["Idle_" + self.character_direction][0]
+        #self.sprite = self.SPRITES["Idle_" + self.character_direction][0]
         display.blit(self.sprite,(self.character.x, self.character.y))
 
 
     def update(self, display, fps):
+        
         self.y_speed += min(1,(self.gravity_count / fps) * self.gravity_weight) #Increases the falling speed based of how long the player has been falling
         self.move(self.x_speed, self.y_speed)
         self.movement()
-        self.load_sprite(display)
         self.update_sprite()
+        self.load_sprite(display)
