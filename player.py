@@ -9,45 +9,55 @@ class Player(pygame.sprite.Sprite):
 
         self.character = pygame.Rect(x - 50, y-50, width, height)
 
-        self.hitbox_colour = 'red'
-        self.hitbox = pygame.Rect(x, y , width, height)
-
         self.sprite_mask = None
-
         self.character_direction = 'right'
         self.animation_frame = 0
 
         self.BLACK = (0,0,0)
 
-        self.y_speed = 5
-        self.x_speed = 5
+        self.movement_speed = 5
+
+        self.y_speed = 0
+        self.x_speed = 0
 
         self.moving = False
 
         self.animation_delay = 5
 
+    def move(self, dx, dy):
+        self.character.x += dx
+        self.character.y += dy
+
+    def move_left(self,speed):
+        self.x_speed = - speed
+        if self.character_direction != 'left':
+            self.character_direction = 'left'
+            self.animation_count = 0
+
+    def move_right(self, speed):
+        self.x_speed = speed
+        if self.character_direction != 'right':
+            self.character_direction = 'right'
+            self.animation_count = 0
 
     def movement(self):
         
+        self.x_speed = 0
         key = pygame.key.get_pressed()
         if key[pygame.K_a] == True:
-            self.character.x -= self.x_speed
-            self.hitbox.x -= self.x_speed
+            self.move_left(self.movement_speed)
             self.character_direction = 'left'
-            self.moving = True
             self.animation_frame = 0
         if key[pygame.K_d] == True:
-            self.character.x += self.x_speed
-            self.hitbox.x += self.x_speed
+            self.move_right(self.movement_speed)
             self.character_direction = 'right'
-            self.moving = True
             self.animation_frame = 0
 
 
     def update_sprite(self):
         sprite_sheet = 'Idle'
         
-        if self.moving:
+        if self.y_speed != 0:
             sprite_sheet = 'Run'
 
         sprite_sheet_name = sprite_sheet + "_" + self.character_direction
@@ -57,17 +67,15 @@ class Player(pygame.sprite.Sprite):
         self.sprite = sprites[sprite_index]
         self.animation_frame += 1
 
-
-
     def load_sprite(self, display):
         # pygame.draw.rect(display, 'blue', self.character)
-        pygame.draw.rect(display, self.hitbox_colour, self.hitbox, 1)
 
         self.sprite = self.SPRITES["Idle_" + self.character_direction][0]
         display.blit(self.sprite,(self.character.x, self.character.y))
 
 
     def update(self, display):
+        self.move(self.x_speed, self.y_speed)
         self.movement()
         self.load_sprite(display)
         self.update_sprite()
